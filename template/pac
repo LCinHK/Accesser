@@ -32,6 +32,7 @@ var domains = {
   "euronews.com": 1,
   "reuters.com": 1,
   "google.com.hk": 1,
+  "on.cc": 1,
   "mega.nz": 1
 };
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#C:\Program Files\Python37\python.exe
 # -*- coding: utf-8 -*-
 # Accesser
 # Copyright (C) 2018  URenko
@@ -51,7 +51,7 @@ class ProxyHandler(StreamRequestHandler):
     raw_request = b''
     remote_ip = None
     host = None
-    
+
     def update_cert(self, server_name):
         res = get_tld(server_name, as_object=True, fix_protocol=True)
         if res.subdomain:
@@ -63,11 +63,11 @@ class ProxyHandler(StreamRequestHandler):
                 cm.create_certificate(server_name)
             context.load_cert_chain(os.path.join(cm.certpath, "{}.crt".format(server_name)))
             cert_store.add(server_name)
-    
+
     def send_error(self, code, message=None, explain=None):
         #TODO
         pass
-    
+
     def http_redirect(self, path):
         ishttp = False
         if path.startswith('http://'):
@@ -83,7 +83,7 @@ class ProxyHandler(StreamRequestHandler):
         logger.debug('Redirect to '+path)
         self.wfile.write(REDIRECT_HEADER.format(path).encode('iso-8859-1'))
         return True
-    
+
     def parse_host(self, forward=False):
         content_lenght = None
         try:
@@ -268,14 +268,14 @@ def update_checker():
 
 if __name__ == '__main__':
     print("Accesser v{}  Copyright (C) 2018-2019  URenko".format(__version__))
-    
+
     threading.Thread(target=update_checker).start()
-    
+
     proxy = Proxy()
     webui.init(proxy, version=__version__)
     if setting.config['webui']:
         webbrowser.open('http://localhost:{}/'.format(setting.config['webuiport']))
-    
+
     DNSresolver = Resolver(configure=False)
     if not setting.config['DNS']['dnscrypt-proxy']:
         DNSresolver.nameservers = [setting.config['DNS']['nameserver']]
@@ -293,12 +293,12 @@ if __name__ == '__main__':
             si = None
         subprocess.Popen([os.path.join(dnscrypt_dir, 'dnscrypt-proxy'),'-child','-logfile','dnscrypt-proxy.log'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE \
                , startupinfo=si, env=os.environ)
-    
+
     importca.import_ca()
 
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     cert_store = set()
     cert_lock = threading.Lock()
-    
+
     threading.Thread(target=proxy.start, args=(setting.config['server']['address'],setting.config['server']['port'])).start()
     asyncio.get_event_loop().run_forever()

@@ -108,6 +108,7 @@ CERT/
 hosts
 *.exe
 !sysproxy.exe
+!/dnscrypt/dnscrypt-proxy.exe
 config.json
 .1
 /pac

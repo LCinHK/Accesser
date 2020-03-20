@@ -1,5 +1,6 @@
 var domains = {
   "steamcommunity.com": 1,
+  "nytimes.com": 1,
   "pixiv.net": 1,
   "tumblr.com": 1,
   "tumblr.co": 1,
@@ -33,7 +34,9 @@ var domains = {
   "reuters.com": 1,
   "google.com.hk": 1,
   "on.cc": 1,
-  "mega.nz": 1
+  "mega.nz": 1,
+  "hk01.com": 1,
+  "telegram.org": 1,
 };
 
 var shexps = {

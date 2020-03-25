@@ -37,7 +37,7 @@ var domains = {
   "on.cc": 1,
   "mega.nz": 1,
   "hk01.com": 1,
-  "telegram.org": 1,
+  "joshinweb.jp": 1,
 };
 
 var shexps = {
